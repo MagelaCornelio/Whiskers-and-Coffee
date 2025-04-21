@@ -1,68 +1,149 @@
 import 'package:flutter/material.dart';
 import 'config/router.dart'; // Importa tu configuración de router
 
+// Define tus colores personalizados para fácil acceso
+abstract class AppColors {
+  static const Color primaryDark =
+      Color.fromARGB(255, 107, 100, 94); // Marrón Oscuro
+  static const Color primaryLight = Color(0xFFFFF8E1); // Crema / Beige Claro
+  static const Color accent = Color.fromARGB(255, 151, 120, 78); // Ámbar
+  static const Color textDark = Color(0xFF333333); // Gris Oscuro (casi negro)
+  static const Color textLight = Color(0xFF757575); // Gris Medio
+  static const Color white = Color(0xFFFFFFFF);
+  static const Color background =
+      Color(0xFFFAFAFA); // Un blanco ligeramente roto para el fondo general
+}
+
 void main() {
   runApp(const MyApp());
 }
 
-// En lib/main.dart
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Cafetería El Grano Feliz', // Cambia el título
+      title: 'Whiskers & Coffee', // Asegúrate que este sea tu nombre
       theme: ThemeData(
-        brightness: Brightness.light, // Modo claro (puedes probar .dark)
-        primarySwatch: Colors.brown, // Paleta base
-        // Puedes definir colores más específicos:
-        colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.brown,
-          accentColor: Colors.amber[700], // Color de acento para botones, etc.
-          brightness: Brightness.light,
+        brightness: Brightness.light,
+        // Usar nuestros colores personalizados
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color.fromARGB(
+              255, 110, 88, 83), // El color base para generar la paleta
+          primary: const Color.fromARGB(255, 107, 88, 88),
+          secondary: const Color.fromARGB(255, 99, 84, 66),
+          background: const Color.fromARGB(
+              255, 219, 164, 127), // Fondo general de la app
+          surface: AppColors.white, // Fondo de elementos como Cards
+          onPrimary: AppColors.white, // Texto/iconos sobre primaryDark
+          onSecondary: AppColors.textDark, // Texto/iconos sobre accent
+          onBackground: AppColors.textDark, // Texto principal sobre background
+          onSurface:
+              AppColors.textDark, // Texto principal sobre surface (cards, etc)
+          error: Colors.redAccent, // Color para errores
         ),
-        scaffoldBackgroundColor: Colors.white, // Color de fondo general
+        scaffoldBackgroundColor: AppColors.background, // Fondo de los Scaffold
+
+        // Definir fuentes (Asegúrate de tenerlas o usa las de Google Fonts)
         fontFamily:
-            'Roboto', // Asegúrate de tener la fuente o usa una por defecto
-        // Definir algunos estilos de texto globales puede ser útil
+            'Roboto', // Puedes cambiarla si añades una fuente personalizada
+
+        // Estilos de Texto
         textTheme: const TextTheme(
+          // Para títulos muy grandes (como el Hero)
           headlineLarge: TextStyle(
-              fontSize: 32.0,
+              fontSize: 36.0,
               fontWeight: FontWeight.bold,
-              color: Colors.black87),
+              color: AppColors.primaryDark,
+              fontFamily: 'RobotoSlab'), // Ejemplo con otra fuente
+          // Para títulos de sección
           headlineMedium: TextStyle(
-              fontSize: 24.0,
+              fontSize: 28.0,
               fontWeight: FontWeight.w600,
-              color: Colors.black87),
-          titleLarge: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),
-          bodyLarge: TextStyle(
-              fontSize: 16.0, height: 1.5), // Buen tamaño para lectura
-          bodyMedium: TextStyle(fontSize: 14.0),
+              color: AppColors.primaryDark,
+              fontFamily: 'RobotoSlab'),
+          // Para títulos de tarjetas o elementos importantes
+          titleLarge: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+              color: AppColors.textDark),
+          // Para subtítulos o texto un poco menos importante
+          titleMedium: TextStyle(
+              fontSize: 18.0,
+              fontWeight: FontWeight.w500,
+              color: AppColors.textDark),
+          // Texto principal del cuerpo
+          bodyLarge:
+              TextStyle(fontSize: 16.0, color: AppColors.textDark, height: 1.5),
+          // Texto secundario o descripciones
+          bodyMedium: TextStyle(
+              fontSize: 14.0, color: AppColors.textLight, height: 1.4),
+          // Texto para botones
+          labelLarge: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
         ),
-        // Estilo global para ElevatedButton (puedes sobreescribirlo localmente)
+
+        // Estilos de Botones
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            foregroundColor: Colors.white, // Color del texto del botón
-            backgroundColor: Colors.brown[700], // Color de fondo del botón
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-          ),
+              backgroundColor:
+                  AppColors.accent, // Color de fondo del botón principal
+              foregroundColor:
+                  AppColors.textDark, // Color del texto del botón principal
+              padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              textStyle:
+                  const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
         ),
-        // Estilo para TextButton
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            foregroundColor: Colors.brown[800], // Color del texto
-          ),
+              foregroundColor: AppColors.primaryDark, // Color del texto
+              textStyle: const TextStyle(fontWeight: FontWeight.w600)),
         ),
-        // Estilo para AppBar (nuestra NavBar)
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.brown[800],
-          foregroundColor: Colors.white, // Color del título y botones de texto
+
+        // Estilo de AppBar (NavBar)
+        appBarTheme: const AppBarTheme(
+            backgroundColor: AppColors.primaryDark,
+            foregroundColor: AppColors
+                .white, // Color del título y botones de texto en AppBar
+            elevation: 3.0,
+            titleTextStyle: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: AppColors.white,
+                fontFamily: 'Roboto')),
+
+        // Estilo de Cards
+        cardTheme: CardTheme(
+          color: AppColors.white, // Fondo de las tarjetas
           elevation: 2.0,
+          margin:
+              const EdgeInsets.symmetric(vertical: 8.0), // Margen por defecto
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          clipBehavior:
+              Clip.antiAlias, // Importante para que imágenes respeten bordes
         ),
+
+        // Estilo para InputFields (útil para el formulario de contacto)
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8.0),
+              borderSide: BorderSide(color: Colors.grey[400]!)),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8.0),
+              borderSide:
+                  const BorderSide(color: AppColors.primaryDark, width: 2.0)),
+          labelStyle: const TextStyle(color: AppColors.textLight),
+          hintStyle: const TextStyle(color: AppColors.textLight),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+        ),
+
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       debugShowCheckedModeBanner: false,
       routerConfig: router,

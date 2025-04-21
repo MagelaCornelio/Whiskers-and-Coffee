@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart'; // Necesario para los botones
+import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -62,7 +62,7 @@ class HomeScreen extends StatelessWidget {
             Text(
               'The art of specialty Coffee and its Whiskers',
               style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                    color: const Color.fromARGB(255, 0, 0, 0),
+                    color: const Color.fromARGB(255, 255, 255, 255),
                     fontWeight: FontWeight.bold,
                   ),
               textAlign: TextAlign.center,
@@ -71,7 +71,7 @@ class HomeScreen extends StatelessWidget {
             Text(
               'Discover unique flavors alongside your favorite kitties', // Personaliza
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Colors.white,
+                    color: const Color.fromARGB(255, 250, 250, 250),
                   ),
               textAlign: TextAlign.center,
             ),
@@ -125,16 +125,14 @@ class HomeScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 TextButton(
-                  onPressed: () => context.go('/us'),
+                  onPressed: () => context.go('/nosotros'),
                   child: const Text('Learn more about us →'),
                 ),
               ],
             ),
           ),
-          const SizedBox(width: 40), // Espacio entre texto e imagen
-          // Columna para la imagen (si hay espacio)
+          const SizedBox(width: 40), 
           Expanded(
-            // Toma el espacio restante
             flex: 1,
             child: ClipRRect(
               // Para bordes redondeados
@@ -149,9 +147,6 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
     );
-    // NOTA: Este Row simple no es muy responsivo. En pantallas pequeñas,
-    // deberíamos cambiar a un Column para que la imagen quede debajo del texto.
-    // Lo veremos más adelante si profundizamos en responsividad.
   }
 
   // --- Widget para los Destacados del Menú ---
@@ -278,10 +273,7 @@ class HomeScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 15),
-              TextButton(
-                onPressed: () => context.go('/ubicacion'),
-                child: const Text('Map and Details→'),
-              ),
+
             ],
           ),
 
