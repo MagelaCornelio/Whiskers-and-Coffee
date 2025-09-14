@@ -116,7 +116,7 @@ class MyApp extends StatelessWidget {
                 fontFamily: 'Roboto')),
 
         // Estilo de Cards
-        cardTheme: CardTheme(
+        cardTheme: CardThemeData(
           color: AppColors.white, // Fondo de las tarjetas
           elevation: 2.0,
           margin:
