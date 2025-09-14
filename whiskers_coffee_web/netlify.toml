@@ -1,0 +1,25 @@
+[build]
+  command = """
+  # 1. Clone Flutter SDK (use 'stable' branch for the latest stable version)
+  # We clone it into a temporary directory in the build environment.
+  git clone https://github.com/flutter/flutter.git --depth 1 -b stable $HOME/flutter_sdk
+
+  # 2. Add Flutter's bin directory to the PATH
+  # This makes the 'flutter' command available.
+  export PATH="$PATH:$HOME/flutter_sdk/bin"
+
+  # 3. Pre-cache Flutter dependencies specifically for web (important!)
+  flutter precache --web
+
+  # 4. Get your project's Dart/Flutter dependencies
+  flutter pub get
+
+  # 5. Finally, build your Flutter web app
+  flutter build web
+  """
+  publish = "build/web" # This tells Netlify where your built files are located
+
+[build.environment]
+  # Optional: Specify a Node.js version if your project has Node.js dependencies
+  # (e.g., if you use npm for pre/post-build scripts)
+  NODE_VERSION = "18" # Or "16", "20", etc., depending on your needs.
