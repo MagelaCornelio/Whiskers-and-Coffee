@@ -2,7 +2,7 @@
     "version": 2,
     "builds": [
         {
-            "src": "whiskers_coffee_web/index.html",
+            "src": "whiskers_coffee_web/build/web/index.html",
             "use": "@vercel/static-build",
             "config": {
                 "outputDirectory": "whiskers_coffee_web/build/web"
